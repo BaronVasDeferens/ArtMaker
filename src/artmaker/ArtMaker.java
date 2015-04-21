@@ -35,7 +35,9 @@ public class ArtMaker {
         while (true)
         //for (int i = 0; i < 5; i++)
         {    
-            gridMorph.morph();
+            if (artFrame.drawPanel.increaseValue)
+                gridMorph.morph();
+            
             artFrame.drawPanel.setImage(gridMorph.image);
             artFrame.drawPanel.repaint();
             

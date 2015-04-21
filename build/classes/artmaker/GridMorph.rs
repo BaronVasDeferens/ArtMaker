@@ -1,2 +1,0 @@
-artmaker.Point
-artmaker.GridMorph
