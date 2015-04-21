@@ -21,7 +21,7 @@ public class GridMorph {
     final int cols = 15;
     final int initialSpacing = 50;
     
-    final int morphValue = 2;
+    int morphValue = 2;
     
     Point pointGrid[][];
     Polygon polygonGrid[][];
