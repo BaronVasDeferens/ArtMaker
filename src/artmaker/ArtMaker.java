@@ -17,14 +17,27 @@ public class ArtMaker {
         // TODO code application logic here
        
         ArtFrame artFrame = new ArtFrame(); 
+        
+        ImageProducer drawer;
+        
+        //drawer = new Triangles(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
+        //drawer = new GridMorph(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
+        
+        drawer = new MazeMaker2(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
+        
+        //drawer = new GridRunner(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
+        
+        artFrame.drawPanel.setImage(drawer.image);
+        
+        //GridRunner gRun 
+        //artFrame.drawPanel.setImage(gRun.image);
+        
         artFrame.setVisible(true);
-        GridMorph gridMorph = new GridMorph(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
-        artFrame.drawPanel.setImage(gridMorph.image);
         
         //PAUSE
         try
         {
-            java.lang.Thread.sleep(1000);
+            java.lang.Thread.sleep(50);
         }
         catch (java.lang.InterruptedException e)
         {
@@ -35,10 +48,11 @@ public class ArtMaker {
         while (true)
         //for (int i = 0; i < 5; i++)
         {    
-            if (artFrame.drawPanel.increaseValue)
-                gridMorph.morph();
+            //gRun.update(artFrame.drawPanel);
+            drawer.update();
             
-            artFrame.drawPanel.setImage(gridMorph.image);
+            //artFrame.drawPanel.setImage(gRun.image);
+            artFrame.drawPanel.setImage(drawer.image);
             artFrame.drawPanel.repaint();
             
             try

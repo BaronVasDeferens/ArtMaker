@@ -21,15 +21,20 @@ public class DrawPanel extends JPanel implements KeyListener{
     BufferedImage img = null;
     Thread t;
     boolean alive = false;
+    boolean movingUp, movingDown, movingRight, movingLeft;
     Graphics g;
     
     boolean increaseValue = false;
     
-    DrawPanel()
+    public DrawPanel()
     {
         super();
         this.setFocusable(true);
         addKeyListener(this);
+        movingUp = false;
+        movingDown = false;
+        movingLeft = false;
+        movingRight = false;
     }
     
     public void setImage(BufferedImage ig)
@@ -54,12 +59,48 @@ public class DrawPanel extends JPanel implements KeyListener{
     public void keyPressed(KeyEvent e)
     {
         increaseValue = true;
+        
+        switch (e.getKeyChar())
+        {
+            case 'w':
+                movingUp = true;
+                break;
+            case 's':
+                movingDown = true;
+                break;
+            case 'a':
+                movingLeft = true;
+                break;
+            case 'd':
+                movingRight = true;
+                break;
+            default:
+                break;
+        }
     }
     
     @Override
     public void keyReleased(KeyEvent e)
     {
         increaseValue = false;
+        
+                switch (e.getKeyChar())
+        {
+            case 'w':
+                movingUp = false;
+                break;
+            case 's':
+                movingDown = false;
+                break;
+            case 'a':
+                movingLeft = false;
+                break;
+            case 'd':
+                movingRight = false;
+                break;
+            default:
+                break;
+        }
     }
     
     @Override

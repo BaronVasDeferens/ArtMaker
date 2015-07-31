@@ -10,16 +10,17 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 import java.awt.image.*;
+import java.awt.*;
 
 /**
  *
  * @author skot
  */
-public class GridMorph {
+public class GridMorph extends ImageProducer{
     
-    final int rows = 25;
-    final int cols = 15;
-    final int initialSpacing = 50;
+//    final int rows = 25;
+//    final int cols = 15;
+//    final int initialSpacing = 50;
     
     int morphValue = 2;
     
@@ -27,11 +28,14 @@ public class GridMorph {
     Polygon polygonGrid[][];
     Color colorGrid[][];
     
-    public BufferedImage image;
+//    public BufferedImage image;
     
     GridMorph(int wid, int hei)
     {
-        java.util.Random rando = new java.util.Random();
+        super(wid, hei);
+        
+        rows = 26;
+        cols = 15;
         
         pointGrid = new Point[rows+1][cols+1];
         polygonGrid = new Polygon[rows][cols];
@@ -47,8 +51,9 @@ public class GridMorph {
             }
         }
 
-        image = new BufferedImage(wid,hei, BufferedImage.OPAQUE);
-        Graphics g = image.createGraphics();
+        //Graphics g = image.createGraphics();
+        Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, image.getWidth(), image.getHeight());
@@ -68,8 +73,10 @@ public class GridMorph {
                 polygonGrid[x][y].addPoint(pointGrid[x][y+1].x, pointGrid[x][y+1].y);
 
                 //Establish a color associated with a specific poly
-                colorGrid[x][y] = new Color(rando.nextInt(255), rando.nextInt(255), rando.nextInt(255));
-                //colorGrid[x][y] = new Color(255, 255, rando.nextInt(255));
+                //colorGrid[x][y] = new Color(rando.nextInt(255), rando.nextInt(255), rando.nextInt(255));
+                
+                colorGrid[x][y] = new Color((rando.nextInt(235))+20,0,0);
+                
                 g.setColor(colorGrid[x][y]);
                 
                 g.fillPolygon(polygonGrid[x][y]);
@@ -79,9 +86,8 @@ public class GridMorph {
     }//constructor
     
     
-    public void morph()
+    public void update()
     {
-        java.util.Random rando = new java.util.Random();
         
         //Adjust each point in a (semi) random direction
         for (int x = 0; x < rows+1; x++)
@@ -93,7 +99,9 @@ public class GridMorph {
             }
         }
         
-        Graphics g = image.getGraphics();
+        Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, image.getWidth(), image.getHeight());
@@ -124,48 +132,9 @@ public class GridMorph {
         
         //blur();
         //spin();
-    }
-
-    private void blur()
-    {
-        
-        float[] matrix = 
-        {
-            0.111f, 0.111f, 0.111f, 
-            0.111f, 0.111f, 0.111f, 
-            0.111f, 0.111f, 0.111f, 
-        };
-        
-        /*
-        float[] matrix = 
-        {
-            0.211f, 0.211f, 0.211f, 
-            0.211f, 0.211f, 0.211f, 
-            0.211f, 0.211f, 0.211f,
-        };
-        */
-        
-        java.awt.image.BufferedImageOp op = new java.awt.image.ConvolveOp( new Kernel(3, 3, matrix) );
-	BufferedImage temp = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.OPAQUE);
-        BufferedImage blurredImage = op.filter(image, temp);
-        image = blurredImage;
-        
-    }
-    
-    //Broken
-    private void spin()
-    {
-        AffineTransform transform = new AffineTransform();
-        BufferedImage tmp;
-        
-        transform.rotate(1, image.getWidth()/2, image.getHeight()/2);
-        //transform.rotate(1);
-        AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
-        tmp = op.filter(image, null);
-        image = tmp;
-    }
-    
+    }  
 }
+
 
 class Point
 {
