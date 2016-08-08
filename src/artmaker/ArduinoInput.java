@@ -5,20 +5,16 @@
  */
 package artmaker;
 
-import java.awt.Event.*;
-import java.awt.event.KeyEvent;
+import java.net.Socket;
+import java.io.BufferedInputStream;
+
 /**
  *
  * @author skot
  */
-public class ArtMaker {
-
+public class ArduinoInput {
     
-    public static void main(String[] args) {
-        
-        Maker maker = new Maker();
-       
-    }    
+    Socket socket = null;
+    
     
 }
-

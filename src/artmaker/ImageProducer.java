@@ -12,6 +12,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.Kernel;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -21,7 +23,7 @@ public abstract class ImageProducer {
     
     protected int width, height;
     
-    protected int rows = 25;
+    protected int rows = 15;
     protected int cols = 15;
     protected int initialSpacing = 50;
 
@@ -29,10 +31,23 @@ public abstract class ImageProducer {
     
     public BufferedImage image;
     
-    ImageProducer(int wid, int hei)
+    ImageProducer(int width, int height)
     {
-        width = wid;
-        height = hei;
+        this.width = width;
+        this.height = height;
+        
+        while (cols * initialSpacing < height) {
+            cols += 2;
+        }
+        
+        while (rows * initialSpacing < width) {
+            rows += 2;
+        }
+        
+        System.out.println("imgProd width: " + width);
+        System.out.println("imgProd height: " + height);
+        System.out.println("final rows: " + rows);
+        System.out.println("final cols: " + cols);
         
         image = new BufferedImage(width,height, BufferedImage.OPAQUE);
         Graphics g = image.createGraphics();
@@ -87,5 +102,8 @@ public abstract class ImageProducer {
         tmp = op.filter(image, null);
         image = tmp;
     }
+    
+
+    
     
 }

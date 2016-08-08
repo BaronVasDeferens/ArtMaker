@@ -19,28 +19,38 @@ public class Triangles extends ImageProducer {
     Polygon poly;
     Polygon poly2;
     Point one, two, three;
-    final int minLength = 75;
+    //final int minLength = 75;
     
     Point pointGrid[][];
-    final int gridSize = 25;
+    int gridRows = 25;
+    int gridCols = 25;
+    int squareSize = 25;
     final int spacing = 46;
     
     Color colorGrid[][];
     
-    final int morphValue = 4;
+    final int morphValue = 3;
     int xMorph = 8;
     int yMorph = 8;
     
-    Triangles(int wid, int hei) {
+    Triangles(int width, int height) {
         
-        super(wid,hei);
+        super(width,height);
         
-        pointGrid = new Point[gridSize][gridSize];
-        colorGrid = new Color[gridSize][gridSize];
+        while (gridCols * squareSize < width) {
+            gridCols += 2;
+        }
+        
+        while (gridRows * squareSize < height) {
+            gridRows += 2;
+        }
+        
+        pointGrid = new Point[gridRows][gridCols];
+        colorGrid = new Color[gridRows][gridCols];
                
-        for (int i = 0; i < gridSize; i++) {
+        for (int i = 0; i < gridRows; i++) {
             
-            for (int j = 0; j < gridSize; j++) {
+            for (int j = 0; j < gridCols; j++) {
 
                 if (j%2 == 0)
                     pointGrid[i][j] = new Point(i * spacing, j * spacing);
@@ -83,9 +93,9 @@ public class Triangles extends ImageProducer {
         
         int i = 0, j = 0;
         
-        for (i = 0; i < gridSize-1; i++) {
+        for (i = 0; i < gridRows-1; i++) {
             
-            for (j = 0; j < gridSize-1; j++) {
+            for (j = 0; j < gridCols-1; j++) {
                                
                 // tweak grid along different x and y values
                 pointGrid[i][j].x += (rando.nextInt(xMorph) - rando.nextInt(xMorph));

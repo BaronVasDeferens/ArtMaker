@@ -16,26 +16,19 @@ import java.awt.*;
  *
  * @author skot
  */
-public class GridMorph extends ImageProducer{
-    
-//    final int rows = 25;
-//    final int cols = 15;
-//    final int initialSpacing = 50;
-    
+public class GridMorph extends ImageProducer {
+         
     int morphValue = 2;
     
     Point pointGrid[][];
     Polygon polygonGrid[][];
     Color colorGrid[][];
     
-//    public BufferedImage image;
+
     
-    GridMorph(int wid, int hei)
+    GridMorph(int width, int height)
     {
-        super(wid, hei);
-        
-        rows = 26;
-        cols = 15;
+        super(width, height);
         
         pointGrid = new Point[rows+1][cols+1];
         polygonGrid = new Polygon[rows][cols];

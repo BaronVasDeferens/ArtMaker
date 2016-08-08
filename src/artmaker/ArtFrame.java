@@ -5,18 +5,52 @@
  */
 package artmaker;
 
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
+
 /**
  *
  * @author skot
  */
-public class ArtFrame extends javax.swing.JFrame {
+public class ArtFrame extends JFrame implements KeyListener {
 
-    /**
-     * Creates new form ArtFrame
-     */
-    public ArtFrame() {
+    Maker controller;
+
+    public ArtFrame(Maker maker) {
+
+        this.controller = maker;
         initComponents();
+        requestFocus();
+        addKeyListener(this);
         
+    }
+    
+      
+    public void keyPressed(KeyEvent e) {
+        
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_ESCAPE:
+                System.exit(0);
+                break;
+            case KeyEvent.VK_SPACE:
+                controller.isPaused = !controller.isPaused;
+                break;
+            default:
+                break;
+                
+        }
+
+    }
+    
+    public void keyTyped(KeyEvent e) {
+        
+
+        
+    }
+    
+    public void keyReleased(KeyEvent e) {
+        //System.exit(0);
         
     }
 
@@ -29,38 +63,17 @@ public class ArtFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        drawPanel = new artmaker.DrawPanel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        drawPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout drawPanelLayout = new javax.swing.GroupLayout(drawPanel);
-        drawPanel.setLayout(drawPanelLayout);
-        drawPanelLayout.setHorizontalGroup(
-            drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1254, Short.MAX_VALUE)
-        );
-        drawPanelLayout.setVerticalGroup(
-            drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 731, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 291, Short.MAX_VALUE)
         );
 
         pack();
@@ -103,6 +116,5 @@ public class ArtFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public artmaker.DrawPanel drawPanel;
     // End of variables declaration//GEN-END:variables
 }
