@@ -23,7 +23,8 @@ public class Maker {
         artFrame.add(drawPanel);
 
 
-        ImageProducer drawer = //new Triangles(drawPanel.getWidth(), drawPanel.getHeight());
+        ImageProducer drawer = 
+        //new Triangles(drawPanel.getWidth(), drawPanel.getHeight());
         new GridMorph(drawPanel.getWidth(), drawPanel.getHeight());
         //new MazeMaker(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
         //new GridRunner(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());

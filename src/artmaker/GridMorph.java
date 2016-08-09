@@ -48,7 +48,7 @@ public class GridMorph extends ImageProducer {
         Graphics2D g = image.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.setColor(Color.BLACK);
+        g.setColor(Color.RED);
         g.fillRect(0, 0, image.getWidth(), image.getHeight());
 
         g.setColor(Color.RED);
@@ -68,7 +68,10 @@ public class GridMorph extends ImageProducer {
                 //Establish a color associated with a specific poly
                 //colorGrid[x][y] = new Color(rando.nextInt(255), rando.nextInt(255), rando.nextInt(255));
                 
-                colorGrid[x][y] = new Color((rando.nextInt(235))+20,0,0);
+                //colorGrid[x][y] = new Color((rando.nextInt(235))+20,0,0);
+                int r = 255; //rando.nextInt(235) + 35;
+                int gb = rando.nextInt(64) * 2;
+                colorGrid[x][y] = new Color(r, gb, gb);
                 
                 g.setColor(colorGrid[x][y]);
                 
@@ -96,7 +99,7 @@ public class GridMorph extends ImageProducer {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
-        g.setColor(Color.BLACK);
+        g.setColor(Color.RED);
         g.fillRect(0, 0, image.getWidth(), image.getHeight());
 
         for (int x = 0; x < rows; x++)

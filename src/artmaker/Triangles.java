@@ -29,7 +29,7 @@ public class Triangles extends ImageProducer {
     
     Color colorGrid[][];
     
-    final int morphValue = 3;
+    final int morphValue = 5;
     int xMorph = 8;
     int yMorph = 8;
     
@@ -63,7 +63,10 @@ public class Triangles extends ImageProducer {
                 //colorGrid[i][j] = new Color(val,val,val);
                 
                 // Shades of red
-                colorGrid[i][j] = new Color((rando.nextInt(235))+20,0,0);
+                int r = 255; //rando.nextInt(235) + 35;
+                int gb = rando.nextInt(128) * 2;
+                colorGrid[i][j] = new Color(r, gb, gb);
+                
                 
                 // All colors; stained glass?
                 //colorGrid[i][j] = new Color( rando.nextInt(255) ,rando.nextInt(255), rando.nextInt(255));
@@ -84,7 +87,7 @@ public class Triangles extends ImageProducer {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
                 RenderingHints.VALUE_ANTIALIAS_ON);
         
-        g2.setColor(colorGrid[0][0]);
+        g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, image.getWidth(), image.getHeight());
         
         g2.setColor(Color.RED);
