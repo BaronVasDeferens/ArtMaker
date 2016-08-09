@@ -51,8 +51,6 @@ public class GridMorph extends ImageProducer {
         g.setColor(Color.RED);
         g.fillRect(0, 0, image.getWidth(), image.getHeight());
 
-        g.setColor(Color.RED);
-
 
         for (int x = 0; x < rows; x++)
         {
@@ -69,9 +67,9 @@ public class GridMorph extends ImageProducer {
                 //colorGrid[x][y] = new Color(rando.nextInt(255), rando.nextInt(255), rando.nextInt(255));
                 
                 //colorGrid[x][y] = new Color((rando.nextInt(235))+20,0,0);
-                int r = 255; //rando.nextInt(235) + 35;
-                int gb = rando.nextInt(64) * 2;
-                colorGrid[x][y] = new Color(r, gb, gb);
+                int r = 65 + rando.nextInt(190);
+                int b = (int)(r * .6);
+                colorGrid[x][y] = new Color(0, b, r);
                 
                 g.setColor(colorGrid[x][y]);
                 
@@ -99,7 +97,7 @@ public class GridMorph extends ImageProducer {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
-        g.setColor(Color.RED);
+        g.setColor(colorGrid[0][0]);
         g.fillRect(0, 0, image.getWidth(), image.getHeight());
 
         for (int x = 0; x < rows; x++)
