@@ -22,16 +22,16 @@ public class Triangles extends ImageProducer {
     //final int minLength = 75;
     
     Point pointGrid[][];
-    int gridRows = 25;
-    int gridCols = 25;
-    int squareSize = 25;
-    final int spacing = 46;
+    int gridRows = 20;
+    int gridCols = 8;
+    int squareSize = 75;
+    final int spacing = 100;
     
     Color colorGrid[][];
     
-    final int morphValue = 5;
-    int xMorph = 8;
-    int yMorph = 8;
+    final int morphValue = 3;
+    int xMorph = 3;
+    int yMorph = 3;
     
     Triangles(int width, int height) {
         
@@ -62,11 +62,6 @@ public class Triangles extends ImageProducer {
                 //int val = rando.nextInt(2) * 255;
                 //colorGrid[i][j] = new Color(val,val,val);
                 
-                // Shades of red
-                int r = 255; //rando.nextInt(235) + 35;
-                int gb = rando.nextInt(128) * 2;
-                colorGrid[i][j] = new Color(r, gb, gb);
-                
                 
                 // All colors; stained glass?
                 //colorGrid[i][j] = new Color( rando.nextInt(255) ,rando.nextInt(255), rando.nextInt(255));
@@ -87,11 +82,10 @@ public class Triangles extends ImageProducer {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
                 RenderingHints.VALUE_ANTIALIAS_ON);
         
-        g2.setColor(Color.BLACK);
+        g2.setColor(Color.RED);
         g2.fillRect(0, 0, image.getWidth(), image.getHeight());
         
-        g2.setColor(Color.RED);
-        
+      
         Polygon poly;
         
         int i = 0, j = 0;
@@ -133,8 +127,8 @@ public class Triangles extends ImageProducer {
                     
                     //g.setColor(new Color( rando.nextInt(235)+20 ,rando.nextInt(235)+20, rando.nextInt(235)+20));
                     g2.fillPolygon(poly);
-                    g2.setColor(Color.BLACK);
-                    g2.drawPolygon(poly);
+                    //g2.setColor(Color.BLACK);
+                    //g2.drawPolygon(poly);
                    
                     
                 }
@@ -159,8 +153,8 @@ public class Triangles extends ImageProducer {
                     g2.setColor(colorGrid[i][j]);
                     //g.setColor(new Color( rando.nextInt(235)+20 ,rando.nextInt(235)+20, rando.nextInt(235)+20));
                     g2.fillPolygon(poly);
-                    g2.setColor(Color.BLACK);
-                    g2.drawPolygon(poly);
+                    //g2.setColor(Color.BLACK);
+                    //g2.drawPolygon(poly);
                               
             }
         }

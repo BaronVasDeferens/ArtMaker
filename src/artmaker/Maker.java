@@ -10,20 +10,26 @@ package artmaker;
  */
 public class Maker {
     
-    static int sleepInterval = 5;
+    static int sleepInterval = 15;
     public boolean isPaused = false;
+    
+    ImageProducer drawer;
+    ArtFrame artFrame;
+    DrawPanel drawPanel;
     
     public Maker() {
         
-        ArtFrame artFrame = new ArtFrame(this);
+        artFrame = new ArtFrame(this);
+        
         goFullscreen(artFrame);
 
-        DrawPanel drawPanel = new DrawPanel();
+        drawPanel = new DrawPanel();
         drawPanel.setSize(artFrame.getWidth(), artFrame.getHeight());
+        drawPanel.setDoubleBuffered(true);
         artFrame.add(drawPanel);
 
 
-        ImageProducer drawer = 
+        drawer = 
         //new Triangles(drawPanel.getWidth(), drawPanel.getHeight());
         new GridMorph(drawPanel.getWidth(), drawPanel.getHeight());
         //new MazeMaker(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
@@ -85,6 +91,21 @@ public class Maker {
         }
     }
     
+    public void switchToBlue() {
+        drawer.setColorGrid(ColorScheme.BLUES, 65, .75f, drawer.colorGrid);
+    }
+    
+    public void switchToRed() {
+        drawer.setColorGrid(ColorScheme.REDS, 65, .75f, drawer.colorGrid);
+    }
+    
+    public void switchToGreen() {
+        drawer.setColorGrid(ColorScheme.GREENS, 65, .75f, drawer.colorGrid);
+    }
+    
+    public void switchToRandom() {
+        drawer.setColorGrid(ColorScheme.RANDOM, 0, 0, drawer.colorGrid);
+    }
     
    
     public static void println(int num) {

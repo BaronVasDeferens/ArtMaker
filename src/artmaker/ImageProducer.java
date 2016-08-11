@@ -25,11 +25,12 @@ public abstract class ImageProducer {
     
     protected int rows = 15;
     protected int cols = 15;
-    protected int initialSpacing = 50;
-
+    protected int initialSpacing = 75;
     java.util.Random rando;
-    
     public BufferedImage image;
+    Color colorGrid[][];
+    
+    
     
     ImageProducer(int width, int height)
     {
@@ -62,8 +63,67 @@ public abstract class ImageProducer {
     }//constructor
     
     
+    
+    public void setColorGrid(ColorScheme scheme, int minValue, float factor, Color[][] colorGrid) {
+        
+        int maxValue = 255 - minValue;
+
+        
+        switch (scheme) {
+            case REDS:
+                for (int x = 0; x < rows; x++)
+                {
+                    for (int y = 0; y < cols; y++)
+                    {
+                        int r = minValue + rando.nextInt(maxValue);
+                        int b = (int)(r * factor);
+                        colorGrid[x][y] = new Color(r, 0, b);
+                    }
+                }
+                break;
+            case GREENS:
+                for (int x = 0; x < rows; x++)
+                {
+                    for (int y = 0; y < cols; y++)
+                    {
+                        int r = minValue + rando.nextInt(maxValue);
+                        int b = (int)(r * factor);
+                        colorGrid[x][y] = new Color(0, r, b);
+                    }
+                }
+                break;
+            case BLUES:
+                for (int x = 0; x < rows; x++)
+                {
+                    for (int y = 0; y < cols; y++)
+                    {
+                        int r = minValue + rando.nextInt(maxValue);
+                        int b = (int)(r * factor);
+                        colorGrid[x][y] = new Color(b, 0, r);
+                    }
+                }
+                break;
+            case RANDOM:
+                for (int x = 0; x < rows; x++)
+                {
+                    for (int y = 0; y < cols; y++)
+                    {
+                        colorGrid[x][y] = new Color(rando.nextInt(255), rando.nextInt(255), rando.nextInt(255));
+                    }
+                }
+                break;
+        }
+        
+    }
+    
+    
     public abstract void update();
 
+    
+    
+    
+    
+    
     protected void blur()
     {
         
@@ -96,7 +156,7 @@ public abstract class ImageProducer {
         AffineTransform transform = new AffineTransform();
         BufferedImage tmp;
         
-        transform.rotate(1, image.getWidth()/2, image.getHeight()/2);
+        transform.rotate(rando.nextFloat(), 50, 50);
         //transform.rotate(1);
         AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
         tmp = op.filter(image, null);

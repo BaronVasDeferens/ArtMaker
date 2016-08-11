@@ -20,16 +20,16 @@ public class GridMorph extends ImageProducer {
          
     int morphValue = 2;
     
+    
     Point pointGrid[][];
     Polygon polygonGrid[][];
-    Color colorGrid[][];
-    
 
     
+
     GridMorph(int width, int height)
     {
         super(width, height);
-        
+
         pointGrid = new Point[rows+1][cols+1];
         polygonGrid = new Polygon[rows][cols];
         colorGrid = new Color[rows][cols];
@@ -43,8 +43,7 @@ public class GridMorph extends ImageProducer {
                 pointGrid[x][y].y = y * initialSpacing;
             }
         }
-
-        //Graphics g = image.createGraphics();
+       
         Graphics2D g = image.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -67,9 +66,6 @@ public class GridMorph extends ImageProducer {
                 //colorGrid[x][y] = new Color(rando.nextInt(255), rando.nextInt(255), rando.nextInt(255));
                 
                 //colorGrid[x][y] = new Color((rando.nextInt(235))+20,0,0);
-                int r = 65 + rando.nextInt(190);
-                int b = (int)(r * .6);
-                colorGrid[x][y] = new Color(0, b, r);
                 
                 g.setColor(colorGrid[x][y]);
                 
@@ -77,7 +73,12 @@ public class GridMorph extends ImageProducer {
 
             }
         }
+        
+        setColorGrid(ColorScheme.REDS, 55, .80f, colorGrid);
+        
     }//constructor
+    
+    
     
     
     public void update()
@@ -126,6 +127,8 @@ public class GridMorph extends ImageProducer {
         
         //blur();
         //spin();
+        
+        g.dispose();
     }  
 }
 

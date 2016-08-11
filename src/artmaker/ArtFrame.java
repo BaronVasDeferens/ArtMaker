@@ -20,7 +20,7 @@ public class ArtFrame extends JFrame implements KeyListener {
     public ArtFrame(Maker maker) {
 
         this.controller = maker;
-        //this.setUndecorated(true);        // for Windows OS
+        this.setUndecorated(true);
         initComponents();
         requestFocus();
         addKeyListener(this);
@@ -36,6 +36,18 @@ public class ArtFrame extends JFrame implements KeyListener {
                 break;
             case KeyEvent.VK_SPACE:
                 controller.isPaused = !controller.isPaused;
+                break;
+            case KeyEvent.VK_B:
+                controller.switchToBlue();
+                break;
+            case KeyEvent.VK_G:
+                controller.switchToGreen();
+                break;
+            case KeyEvent.VK_R:
+                controller.switchToRed();
+                break;
+            case KeyEvent.VK_X:
+                controller.switchToRandom();
                 break;
             default:
                 break;
@@ -70,7 +82,7 @@ public class ArtFrame extends JFrame implements KeyListener {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 731, Short.MAX_VALUE)
+            .addGap(0, 296, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
