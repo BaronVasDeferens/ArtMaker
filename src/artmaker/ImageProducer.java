@@ -103,6 +103,17 @@ public abstract class ImageProducer {
                     }
                 }
                 break;
+            case YELLOWS:
+                for (int x = 0; x < rows; x++)
+                {
+                    for (int y = 0; y < cols; y++)
+                    {
+                        int r = minValue + rando.nextInt(maxValue);
+                        int b = (int)(r * factor);
+                        colorGrid[x][y] = new Color(r, b, 0);
+                    }
+                }
+                break;
             case RANDOM:
                 for (int x = 0; x < rows; x++)
                 {

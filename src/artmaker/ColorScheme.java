@@ -10,5 +10,5 @@ package artmaker;
  * @author Skot
  */
 public enum ColorScheme {
-    REDS, BLUES, GREENS, RANDOM;
+    REDS, BLUES, GREENS, YELLOWS, RANDOM;
 }

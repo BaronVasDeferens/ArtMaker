@@ -49,6 +49,9 @@ public class ArtFrame extends JFrame implements KeyListener {
             case KeyEvent.VK_X:
                 controller.switchToRandom();
                 break;
+            case KeyEvent.VK_Y:
+                controller.switchToYellow();
+                break;
             default:
                 break;
                 

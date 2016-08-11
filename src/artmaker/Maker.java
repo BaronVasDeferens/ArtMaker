@@ -103,9 +103,15 @@ public class Maker {
         drawer.setColorGrid(ColorScheme.GREENS, 65, .75f, drawer.colorGrid);
     }
     
+    public void switchToYellow() {
+        drawer.setColorGrid(ColorScheme.YELLOWS, 65, .75f, drawer.colorGrid);
+    }
+    
     public void switchToRandom() {
         drawer.setColorGrid(ColorScheme.RANDOM, 0, 0, drawer.colorGrid);
     }
+    
+
     
    
     public static void println(int num) {
