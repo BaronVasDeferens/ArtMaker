@@ -20,7 +20,7 @@ public class ArtFrame extends JFrame implements KeyListener {
     public ArtFrame(Maker maker) {
 
         this.controller = maker;
-        this.setUndecorated(true);
+        //this.setUndecorated(true);
         initComponents();
         requestFocus();
         addKeyListener(this);

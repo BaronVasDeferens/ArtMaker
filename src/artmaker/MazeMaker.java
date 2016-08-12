@@ -14,7 +14,8 @@ import java.util.*;
  */
 public class MazeMaker extends ImageProducer {
     
-
+    boolean drawFrontier = false;
+    boolean drawStats = false;
     Maze maze;
     
     
@@ -22,10 +23,13 @@ public class MazeMaker extends ImageProducer {
     public MazeMaker(int wi, int hi) {
         super(wi,hi);
         
-        maze = new Maze(30,30,20);
+        maze = new Maze(200,100,5);
         
-        
-        
+        Graphics g = image.createGraphics();
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(0, 0, image.getWidth(), image.getHeight());
+        g.dispose();
+       
     }
     
     @Override
@@ -38,41 +42,53 @@ public class MazeMaker extends ImageProducer {
         
         maze.buildMaze();
         
-        for (int i = 0; i < maze.mazeHeight; i++) {
-            for (int j = 0; j < maze.mazeWidth; j++) {
-                
-                if (maze.roomArray[i][j].isOpen == true) 
-                    g.setColor(Color.white);
-                else if (maze.allDone == false)
-                    g.setColor(Color.gray);
-                else
-                    g.setColor(Color.black);
-                
-                g.fillRect(i*maze.roomSize, j*maze.roomSize, maze.roomSize, maze.roomSize);
-                
-                Iterator iter = maze.frontier.iterator();
-                Room rm;
-                
-                
-                g.setColor(Color.green);
-                g.drawString("frontier: " + maze.frontier.size(), 10, 100);
-                g.drawString("unreachable: " + maze.unreachable.size(), 10, 110);
-                g.drawString("open: " + maze.openRooms.size(), 10, 120);
-                
-                g.setColor(Color.blue);
-                while (iter.hasNext()) {
-                    rm = (Room)iter.next();
-                    if (rm != null)
-                        g.drawRect(rm.row * maze.roomSize, rm.col * maze.roomSize, maze.roomSize, maze.roomSize);
-                }
-               
+        
 
-                                
+        
+        LinkedList<Room> openRooms = maze.getOpenRooms();
+        for (Room room : openRooms) {
+            if (room.isOpen == true) {
+                g.setColor(Color.white);
+                g.fillRect(room.row * maze.roomSize, room.col * maze.roomSize, maze.roomSize, maze.roomSize);
             }
+
+        }
+//        for (int i = 0; i < maze.mazeHeight; i++) {
+//            for (int j = 0; j < maze.mazeWidth; j++) {
+//                
+//                if (maze.roomArray[i][j].isOpen == true) 
+//                    g.setColor(Color.white);
+//                else if (maze.allDone == false)
+//                    g.setColor(Color.gray);
+//                else
+//                    g.setColor(Color.black);
+//                
+//                g.fillRect(i*maze.roomSize, j*maze.roomSize, maze.roomSize, maze.roomSize);
+//            } 
+//        }
+        
+        if (drawFrontier) {
+            Iterator iter = maze.frontier.iterator();
+            Room rm;
+            g.setColor(Color.blue);
+            while (iter.hasNext()) {
+                rm = (Room)iter.next();
+                if (rm != null)
+                    g.drawRect(rm.row * maze.roomSize, rm.col * maze.roomSize, maze.roomSize, maze.roomSize);
+            }  
         }
         
+        if (drawStats) {
+            g.setColor(Color.green);
+            g.drawString("frontier: " + maze.frontier.size(), 10, 100);
+            g.drawString("unreachable: " + maze.unreachable.size(), 10, 110);
+            g.drawString("open: " + maze.openRooms.size(), 10, 120);
+        }
+            
+        g.dispose();
     }
     
+        
 }
  
 class Room {
@@ -290,6 +306,19 @@ class Maze {
         }
     }
     
+    public LinkedList<Room> getOpenRooms() { 
+        LinkedList<Room> roomz = new LinkedList<Room>();
+        Iterator iter = openRooms.iterator();
+        Room r;
+        while (iter.hasNext()) {
+            r = (Room) iter.next();
+            roomz.add(r);
+        }
+        
+        openRooms.clear();
+        
+        return roomz;
+    }
     
     private void connecto() {
         

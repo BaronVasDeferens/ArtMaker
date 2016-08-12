@@ -31,8 +31,8 @@ public class Maker {
 
         drawer = 
         //new Triangles(drawPanel.getWidth(), drawPanel.getHeight());
-        new GridMorph(drawPanel.getWidth(), drawPanel.getHeight());
-        //new MazeMaker(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
+        //new GridMorph(drawPanel.getWidth(), drawPanel.getHeight());
+        new MazeMaker(drawPanel.getWidth(), drawPanel.getHeight());
         //new GridRunner(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
 
 
