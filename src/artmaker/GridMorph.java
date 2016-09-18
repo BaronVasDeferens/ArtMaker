@@ -8,6 +8,7 @@ package artmaker;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.*;
 import java.awt.*;
@@ -129,7 +130,65 @@ public class GridMorph extends ImageProducer {
         //spin();
         
         g.dispose();
-    }  
+    }
+
+
+    public void switchToBlue() {
+        setColorGrid(ColorScheme.BLUES, 65, .75f, colorGrid);
+    }
+
+    public void switchToRed() {
+        setColorGrid(ColorScheme.REDS, 65, .75f, colorGrid);
+    }
+
+    public void switchToGreen() {
+        setColorGrid(ColorScheme.GREENS, 65, .75f, colorGrid);
+    }
+
+    public void switchToYellow() {
+        setColorGrid(ColorScheme.YELLOWS, 65, .75f, colorGrid);
+    }
+
+    public void switchToRandom() {
+        setColorGrid(ColorScheme.RANDOM, 0, 0, colorGrid);
+    }
+
+
+    public void keyPressed(KeyEvent e) {
+
+       switch (e.getKeyCode()) {
+            case KeyEvent.VK_ESCAPE:
+                System.exit(0);
+                break;
+
+            case KeyEvent.VK_B:
+                switchToBlue();
+                break;
+            case KeyEvent.VK_G:
+                switchToGreen();
+                break;
+            case KeyEvent.VK_R:
+                switchToRed();
+                break;
+            case KeyEvent.VK_X:
+                switchToRandom();
+                break;
+            case KeyEvent.VK_Y:
+                switchToYellow();
+                break;
+            default:
+                break;
+
+        }
+
+    }
+    public void keyReleased(KeyEvent e) {
+
+    }
+    public void keyTyped(KeyEvent e) {
+
+    }
+
 }
 
 

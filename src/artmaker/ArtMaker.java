@@ -5,20 +5,17 @@
  */
 package artmaker;
 
-import java.awt.Event.*;
-import java.awt.event.KeyEvent;
 /**
- *
  * @author skot
  */
 public class ArtMaker {
 
-    
+
     public static void main(String[] args) {
-        
+
         Maker maker = new Maker();
-       
-    }    
-    
+
+    }
+
 }
 

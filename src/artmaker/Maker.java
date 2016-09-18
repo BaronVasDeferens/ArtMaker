@@ -3,25 +3,32 @@
 package artmaker;
 
 
+import java.awt.event.KeyEvent;
 
 /**
- *
  * @author skot
  */
 public class Maker {
-    
+
     static int sleepInterval = 15;
     public boolean isPaused = false;
-    
+
     ImageProducer drawer;
     ArtFrame artFrame;
     DrawPanel drawPanel;
-    
+
     public Maker() {
-        
+
         artFrame = new ArtFrame(this);
-        
+
         goFullscreen(artFrame);
+
+        // Wait for fullscreen to fully expand
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
         drawPanel = new DrawPanel();
         drawPanel.setSize(artFrame.getWidth(), artFrame.getHeight());
@@ -29,10 +36,10 @@ public class Maker {
         artFrame.add(drawPanel);
 
 
-        drawer = 
-        //new Triangles(drawPanel.getWidth(), drawPanel.getHeight());
-        //new GridMorph(drawPanel.getWidth(), drawPanel.getHeight());
-        new MazeMaker(drawPanel.getWidth(), drawPanel.getHeight());
+        drawer =
+                //new Triangles(drawPanel.getWidth(), drawPanel.getHeight());
+                new GridMorph(drawPanel.getWidth(), drawPanel.getHeight());
+        //new MazeMaker(drawPanel.getWidth(), drawPanel.getHeight());
         //new GridRunner(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
 
 
@@ -41,43 +48,30 @@ public class Maker {
         artFrame.requestFocus();
         artFrame.setVisible(true);
 
-        //PAUSE
-        try
-        {
-            java.lang.Thread.sleep(sleepInterval);
-        }
-        catch (java.lang.InterruptedException e)
-        {
-
-        }
-
 
         while (true) {
-            
-            if ( isPaused  == false) {
+
+            if (isPaused == false) {
                 drawer.update();
                 drawPanel.setImage(drawer.image);
                 drawPanel.repaint();
             }
-            
-            try
-            {
+
+            try {
                 java.lang.Thread.sleep(sleepInterval);
-            }
-            catch (java.lang.InterruptedException e)
-            {
+            } catch (java.lang.InterruptedException e) {
 
             }
-            
 
-        }    
+
+        }
     }
 
-    
+
     private static void goFullscreen(javax.swing.JFrame frame) {
-        
+
         java.awt.GraphicsDevice devices[] = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
-        
+
         for (int i = 0; i < devices.length; i++) {
             println(devices[i].toString());
             println(devices[i].getDisplayMode().getWidth() + "x" + devices[i].getDisplayMode().getHeight());
@@ -90,38 +84,20 @@ public class Maker {
             }
         }
     }
-    
-    public void switchToBlue() {
-        drawer.setColorGrid(ColorScheme.BLUES, 65, .75f, drawer.colorGrid);
-    }
-    
-    public void switchToRed() {
-        drawer.setColorGrid(ColorScheme.REDS, 65, .75f, drawer.colorGrid);
-    }
-    
-    public void switchToGreen() {
-        drawer.setColorGrid(ColorScheme.GREENS, 65, .75f, drawer.colorGrid);
-    }
-    
-    public void switchToYellow() {
-        drawer.setColorGrid(ColorScheme.YELLOWS, 65, .75f, drawer.colorGrid);
-    }
-    
-    public void switchToRandom() {
-        drawer.setColorGrid(ColorScheme.RANDOM, 0, 0, drawer.colorGrid);
-    }
-    
 
-    
-   
+
+    public void keyPressed (KeyEvent e) { drawer.keyPressed(e); }
+    public void keyReleased (KeyEvent e) { drawer.keyReleased(e);}
+    public void keyTyped (KeyEvent e) { drawer.keyTyped(e);}
+
+
     public static void println(int num) {
         println(Integer.toString(num));
     }
-    
+
     public static void println(String str) {
         System.out.println(str);
     }
-    
-    
-    
+
+
 }

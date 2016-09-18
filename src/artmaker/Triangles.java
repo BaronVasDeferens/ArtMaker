@@ -8,6 +8,7 @@ package artmaker;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.awt.event.KeyEvent;
 import java.util.Random;
 import java.awt.*;
 /**
@@ -160,8 +161,20 @@ public class Triangles extends ImageProducer {
         }
          
     }
-    
-   
+
+
+    public void keyPressed(KeyEvent e) {
+
+    }
+    public void keyReleased(KeyEvent e) {
+
+    }
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+
+
 }
 
 

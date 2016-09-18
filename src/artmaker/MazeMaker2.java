@@ -7,6 +7,7 @@ package artmaker;
 
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.*;
 /**
  *
@@ -30,55 +31,65 @@ public class MazeMaker2 extends ImageProducer {
     
     @Override
     public void update() {
-        
+
         Graphics g = image.createGraphics();
 
         //Graphics2D g = image.createGraphics();
         //g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
+
         maze.buildMaaze();
-        
+
         boolean done = maze.allDone;
         for (int i = 0; i < maze.mazeHeight; i++) {
             for (int j = 0; j < maze.mazeWidth; j++) {
-                
-                if (maze.roomArray[i][j].isOpen == true) 
+
+                if (maze.roomArray[i][j].isOpen == true)
                     g.setColor(Color.white);
                 else if (done == false)
                     g.setColor(Color.gray);
                 else
                     g.setColor(Color.black);
-                
+
                 //g.fillRect(i*maze.roomSize, j*maze.roomSize, maze.roomSize, maze.roomSize);
                 g.fillRect(j*maze.roomSize, i*maze.roomSize, maze.roomSize, maze.roomSize);
-                
+
                 if (!done) {
                     g.setColor(Color.green);
                     g.drawString("frontier: " + maze.frontier.size(), 10, 100);
                     g.drawString("unreachable: " + maze.unreachable.size(), 10, 110);
                     g.drawString("open: " + maze.openCells.size(), 10, 120);
                 }
-                
+
 //                Iterator iter = maze.frontier.iterator();
 //                Cell rm;
-//                
+//
 //                g.setColor(Color.blue);
 //                while (iter.hasNext()) {
 //                    rm = (Cell)iter.next();
 //                    if (rm != null)
 //                        g.drawRect(rm.col * maze.roomSize, rm.row * maze.roomSize, maze.roomSize, maze.roomSize);
 //                }
-               
 
-                                
+
+
             }
         }
-        
+
         g.setColor(Color.red);
         g.fillRect(maze.start.col * maze.roomSize, maze.start.row * maze.roomSize, maze.roomSize, maze.roomSize);
-        
+
     }
-    
+
+    public void keyPressed(KeyEvent e) {
+
+    }
+    public void keyReleased(KeyEvent e) {
+
+    }
+    public void keyTyped(KeyEvent e) {
+
+    }
+
 }
  
 class Cell {

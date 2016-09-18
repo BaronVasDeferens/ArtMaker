@@ -10,64 +10,46 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 /**
- *
  * @author skot
  */
 public class ArtFrame extends JFrame implements KeyListener {
 
-    Maker controller;
+    Maker maker;
 
     public ArtFrame(Maker maker) {
 
-        this.controller = maker;
-        //this.setUndecorated(true);
+        this.maker = maker;
+        //this.setUndecorated(true);        // Windows
         initComponents();
-        requestFocus();
+
         addKeyListener(this);
-        
+        requestFocus();
+
     }
-    
-      
+
+
     public void keyPressed(KeyEvent e) {
-        
+
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
                 break;
             case KeyEvent.VK_SPACE:
-                controller.isPaused = !controller.isPaused;
-                break;
-            case KeyEvent.VK_B:
-                controller.switchToBlue();
-                break;
-            case KeyEvent.VK_G:
-                controller.switchToGreen();
-                break;
-            case KeyEvent.VK_R:
-                controller.switchToRed();
-                break;
-            case KeyEvent.VK_X:
-                controller.switchToRandom();
-                break;
-            case KeyEvent.VK_Y:
-                controller.switchToYellow();
+                maker.isPaused = !maker.isPaused;
                 break;
             default:
+                maker.keyPressed(e);
                 break;
-                
+
         }
-
     }
-    
+
     public void keyTyped(KeyEvent e) {
-        
-
-        
+        maker.keyTyped(e);
     }
-    
+
     public void keyReleased(KeyEvent e) {
-        //System.exit(0);
-        
+        maker.keyReleased(e);
     }
 
     /**
@@ -84,12 +66,12 @@ public class ArtFrame extends JFrame implements KeyListener {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 296, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 296, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 291, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 291, Short.MAX_VALUE)
         );
 
         pack();
@@ -98,7 +80,7 @@ public class ArtFrame extends JFrame implements KeyListener {
     /**
      * @param args the command line arguments
      */
-    
+
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

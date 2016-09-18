@@ -7,6 +7,7 @@ package artmaker;
 
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.*;
 /**
  *
@@ -87,8 +88,16 @@ public class MazeMaker extends ImageProducer {
             
         g.dispose();
     }
-    
-        
+
+    public void keyPressed(KeyEvent e) {
+
+    }
+    public void keyReleased(KeyEvent e) {
+
+    }
+    public void keyTyped(KeyEvent e) {
+
+    }
 }
  
 class Room {

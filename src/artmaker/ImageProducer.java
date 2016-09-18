@@ -23,9 +23,9 @@ public abstract class ImageProducer {
     
     protected int width, height;
     
-    protected int rows = 15;
-    protected int cols = 15;
-    protected int initialSpacing = 75;
+    protected int rows = 10;
+    protected int cols = 10;
+    protected int initialSpacing = 50;
     java.util.Random rando;
     public BufferedImage image;
     Color colorGrid[][];
@@ -175,6 +175,7 @@ public abstract class ImageProducer {
     }
     
 
-    
-    
+    public abstract void keyPressed(KeyEvent e);
+    public abstract void keyReleased(KeyEvent e);
+    public abstract void keyTyped(KeyEvent e);
 }
