@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
  */
 public class Maker {
 
-    static int sleepInterval = 15;
+    static int sleepInterval = 1;
     public boolean isPaused = false;
 
     ImageProducer drawer;
@@ -36,9 +36,9 @@ public class Maker {
         artFrame.add(drawPanel);
 
 
-        drawer =
+        drawer = new PicScroller(drawPanel.getWidth(), drawPanel.getHeight());
                 //new Triangles(drawPanel.getWidth(), drawPanel.getHeight());
-                new GridMorph(drawPanel.getWidth(), drawPanel.getHeight());
+                // //new GridMorph(drawPanel.getWidth(), drawPanel.getHeight());
         //new MazeMaker(drawPanel.getWidth(), drawPanel.getHeight());
         //new GridRunner(artFrame.drawPanel.getWidth(), artFrame.drawPanel.getHeight());
 

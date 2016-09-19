@@ -10,5 +10,8 @@ package artmaker;
  * @author Skot
  */
 public enum ColorScheme {
-    REDS, BLUES, GREENS, YELLOWS, RANDOM;
+    REDS, BLUES, GREENS, YELLOWS,
+    MORE_RED, MORE_GREEN, MORE_BLUE,
+    LESS_RED,
+    RANDOM;
 }

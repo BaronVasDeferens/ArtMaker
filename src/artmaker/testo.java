@@ -16,14 +16,9 @@ public class testo {
     
     public static void main(String ... args) {
        
-        int mazeHeight = 15;
-        int mazeWidth = 25;
-        Random rando = new Random();
-        
-        System.out.println("mazeWidth: " + (mazeWidth-2));
-        
-        for (int i = 0; i < 14; i++) {
-            System.out.println(rando.nextInt((mazeWidth-2)) +1);
+
+        for (int i = 0; i < 256; i++) {
+            System.out.println(i % 255);
         }
     }
 }

@@ -5,13 +5,8 @@
  */
 package artmaker;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Polygon;
-import java.awt.event.KeyEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.image.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -65,7 +60,7 @@ public class GridMorph extends ImageProducer {
 
                 //Establish a color associated with a specific poly
                 //colorGrid[x][y] = new Color(rando.nextInt(255), rando.nextInt(255), rando.nextInt(255));
-                
+
                 //colorGrid[x][y] = new Color((rando.nextInt(235))+20,0,0);
                 
                 g.setColor(colorGrid[x][y]);
@@ -75,7 +70,7 @@ public class GridMorph extends ImageProducer {
             }
         }
         
-        setColorGrid(ColorScheme.REDS, 55, .80f, colorGrid);
+        setColorGrid(ColorScheme.REDS, 55, .80f);
         
     }//constructor
     
@@ -97,7 +92,7 @@ public class GridMorph extends ImageProducer {
         
         Graphics2D g = image.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        //g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
         g.setColor(colorGrid[0][0]);
         g.fillRect(0, 0, image.getWidth(), image.getHeight());
@@ -134,24 +129,104 @@ public class GridMorph extends ImageProducer {
 
 
     public void switchToBlue() {
-        setColorGrid(ColorScheme.BLUES, 65, .75f, colorGrid);
+        setColorGrid(ColorScheme.BLUES, 65, .75f);
     }
 
     public void switchToRed() {
-        setColorGrid(ColorScheme.REDS, 65, .75f, colorGrid);
+        setColorGrid(ColorScheme.REDS, 65, .75f);
     }
 
     public void switchToGreen() {
-        setColorGrid(ColorScheme.GREENS, 65, .75f, colorGrid);
+        setColorGrid(ColorScheme.GREENS, 65, .75f);
     }
 
-    public void switchToYellow() {
-        setColorGrid(ColorScheme.YELLOWS, 65, .75f, colorGrid);
+    public void switchToYellow() { setColorGrid(ColorScheme.YELLOWS, 65, .75f); }
+
+    public void switchToRandom() { setColorGrid(ColorScheme.RANDOM, 0, 0); }
+
+    public synchronized void setColorGrid(ColorScheme scheme, int minValue, float factor) {
+
+        int maxValue = 255 - minValue;
+        Color[][] newGrid;
+
+        switch (scheme) {
+            case REDS:
+                for (int x = 0; x < rows; x++)
+                {
+                    for (int y = 0; y < cols; y++)
+                    {
+                        int r = minValue + rando.nextInt(maxValue);
+                        int b = (int)(r * factor);
+                        colorGrid[x][y] = new Color(r, 0, b);
+                    }
+                }
+                break;
+            case GREENS:
+                for (int x = 0; x < rows; x++)
+                {
+                    for (int y = 0; y < cols; y++)
+                    {
+                        int r = minValue + rando.nextInt(maxValue);
+                        int b = (int)(r * factor);
+                        colorGrid[x][y] = new Color(0, r, b);
+                    }
+                }
+                break;
+            case BLUES:
+                for (int x = 0; x < rows; x++)
+                {
+                    for (int y = 0; y < cols; y++)
+                    {
+                        int r = minValue + rando.nextInt(maxValue);
+                        int b = (int)(r * factor);
+                        colorGrid[x][y] = new Color(b, 0, r);
+                    }
+                }
+                break;
+            case YELLOWS:
+                for (int x = 0; x < rows; x++)
+                {
+                    for (int y = 0; y < cols; y++)
+                    {
+                        int r = minValue + rando.nextInt(maxValue);
+                        int b = (int)(r * factor);
+                        colorGrid[x][y] = new Color(r, b, 0);
+                    }
+                }
+                break;
+            case RANDOM:
+                for (int x = 0; x < rows; x++)
+                {
+                    for (int y = 0; y < cols; y++)
+                    {
+                        colorGrid[x][y] = new Color(rando.nextInt(255), rando.nextInt(255), rando.nextInt(255));
+                    }
+                }
+                break;
+            case MORE_RED:
+                newGrid = new Color[rows][cols];
+                for (int i = 0; i < rows; i++) {
+                    for (int j = 0; j < cols; j++) {
+                        Color c = colorGrid[i][j];
+                        newGrid[i][j] = new Color((c.getRed() + 2) % 255, c.getGreen(), c.getBlue());
+                    }
+                }
+                colorGrid = newGrid;
+                break;
+            case LESS_RED:
+                newGrid = new Color[rows][cols];
+                for (int i = 0; i < rows; i++) {
+                    for (int j = 0; j < cols; j++) {
+                        Color c = colorGrid[i][j];
+                        newGrid[i][j] = new Color((c.getRed() - 2) % 255, c.getGreen(), c.getBlue());
+                    }
+                }
+                colorGrid = newGrid;
+                break;
+        }
+
     }
 
-    public void switchToRandom() {
-        setColorGrid(ColorScheme.RANDOM, 0, 0, colorGrid);
-    }
 
 
     public void keyPressed(KeyEvent e) {
@@ -176,6 +251,12 @@ public class GridMorph extends ImageProducer {
             case KeyEvent.VK_Y:
                 switchToYellow();
                 break;
+           case KeyEvent.VK_I:
+                setColorGrid(ColorScheme.MORE_RED, 0,0f);
+               break;
+           case KeyEvent.VK_O:
+               setColorGrid(ColorScheme.LESS_RED, 0,0f);
+               break;
             default:
                 break;
 

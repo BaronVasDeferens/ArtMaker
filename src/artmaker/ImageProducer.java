@@ -64,70 +64,7 @@ public abstract class ImageProducer {
     
     
     
-    public void setColorGrid(ColorScheme scheme, int minValue, float factor, Color[][] colorGrid) {
-        
-        int maxValue = 255 - minValue;
 
-        
-        switch (scheme) {
-            case REDS:
-                for (int x = 0; x < rows; x++)
-                {
-                    for (int y = 0; y < cols; y++)
-                    {
-                        int r = minValue + rando.nextInt(maxValue);
-                        int b = (int)(r * factor);
-                        colorGrid[x][y] = new Color(r, 0, b);
-                    }
-                }
-                break;
-            case GREENS:
-                for (int x = 0; x < rows; x++)
-                {
-                    for (int y = 0; y < cols; y++)
-                    {
-                        int r = minValue + rando.nextInt(maxValue);
-                        int b = (int)(r * factor);
-                        colorGrid[x][y] = new Color(0, r, b);
-                    }
-                }
-                break;
-            case BLUES:
-                for (int x = 0; x < rows; x++)
-                {
-                    for (int y = 0; y < cols; y++)
-                    {
-                        int r = minValue + rando.nextInt(maxValue);
-                        int b = (int)(r * factor);
-                        colorGrid[x][y] = new Color(b, 0, r);
-                    }
-                }
-                break;
-            case YELLOWS:
-                for (int x = 0; x < rows; x++)
-                {
-                    for (int y = 0; y < cols; y++)
-                    {
-                        int r = minValue + rando.nextInt(maxValue);
-                        int b = (int)(r * factor);
-                        colorGrid[x][y] = new Color(r, b, 0);
-                    }
-                }
-                break;
-            case RANDOM:
-                for (int x = 0; x < rows; x++)
-                {
-                    for (int y = 0; y < cols; y++)
-                    {
-                        colorGrid[x][y] = new Color(rando.nextInt(255), rando.nextInt(255), rando.nextInt(255));
-                    }
-                }
-                break;
-        }
-        
-    }
-    
-    
     public abstract void update();
 
     
